@@ -32,7 +32,7 @@ liveReloadServer.server.once("connection", () => {
 
 
 // connect to MongoDB
-mongoose.connect('mongodb+srv://younessbachar02:youyou2003@express.ugnrc.mongodb.net/all-data?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://younessbachar02:youyou2003@express.ugnrc.mongodb.net/all-data?retryWrites=true&w=majority&appName=express')
 .then(()=>{
     app.listen(port,()=>{
         console.log("server work")
