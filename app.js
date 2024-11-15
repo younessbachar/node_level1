@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express();
 const mongoose = require('mongoose');
-const port = rocess.env.port || 3000
+const port = process.env.port || 3000
 app.use(express.urlencoded({extended : true}))
 const Customer = require("./models/customerSchema")
 app.set('view engine', 'ejs')
