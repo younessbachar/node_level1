@@ -1,16 +1,23 @@
 {
   "name": "node_level1",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "watch": "nodemon --ext *"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.1"
+    "connect-livereload": "^0.6.1",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "livereload": "^0.9.3",
+    "method-override": "^3.0.0",
+    "moment": "^2.30.1",
+    "mongoose": "^8.8.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
