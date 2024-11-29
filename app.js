@@ -22,6 +22,7 @@ const homerouter = require('./routes/homeRoute')
 const loginrouter = require('./routes/loginRout')
 const signuprouter = require('./routes/signupRoute')
 
+
 //auto refresh
 
 const path = require("path");
@@ -78,3 +79,7 @@ app.use(deleterouter)
 
 ///search route
 app.use(searchrouter)
+
+
+
+
