@@ -51,70 +51,30 @@ mongoose.connect('mongodb+srv://younessbachar02:youyou2003@express.ugnrc.mongodb
     console.log(err)
 })
 
-// POST Requst
 
+///welcome route
+app.use(welcomerouter)
 
+///signup rout
+app.use(signuprouter)
 
+///login route
+app.use(loginrouter)
 
-app.get('/user/add.html',(req,res)=>{
-    res.render("user/add",{country_list: country_list})
-})
+////home route
+app.use(homerouter)
 
-app.get('/edit/:id',(req,res)=>{
-    Customer.findById(req.params.id)
-    .then((result)=>{
-        res.render("user/edit", {country_list: country_list,obj : result, moment: moment})
-    }).catch((err)=>{
-       console.log(err)
-    })
-    
-})
+///add route
+app.use(addrouter)
 
-app.get('/view/:id',(req,res)=>{ 
-    Customer.findById(req.params.id)
-    .then((result)=>{
-        res.render("./user/view",{customerviewed: result, moment: moment })
-    }
-    ).catch((err)=>{
-        console.log(err)
-    })
-    
+///view route
+app.use(viewrouter)
 
-})
+///edit route
+app.use(editrouter)
 
-
-
-
-
-//post request
-
-app.post("/user/add.html", (req, res) => {
- 
-      Customer.create(req.body)
-      .then(() => {
-        res.redirect("/user/add.html");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-
-
-/////delete request
-
+///delete route
 app.use(deleterouter)
 
-///Create User
-app.post("/signup", async (req, res) => {
-  try{
-    authUser.create(req.body)
-    .then((result)=>{
-      console.log(result)
-      res.redirect("signup")
-    }
-    )
-  }
- catch(error){
-  console.log(error)
- }
-});
+///search route
+app.use(searchrouter)
