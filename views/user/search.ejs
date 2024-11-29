@@ -41,7 +41,8 @@
         <!-- navbar component -->
         <%- include('../components/navbar.ejs') %>
 
-        <table
+        <% if (arr != "") { %>
+          <table
           style="width: 99%"
           class="text-center mx-auto table mt-5 table-striped table-bordered"
         >
@@ -55,44 +56,61 @@
               <th scope="col">Action</th>
             </tr>
           </thead>
+
+          
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>test1</td>
-              <td>test2</td>
-              <td>@test3</td>
+            
+            <% arr.forEach(item => { %>
+              <tr>
+                <th scope="row">1</th>
+                <td><%= item.firstname %><%= item.lastname %></td>
+                <td><%= item.gender %></td>
+                <td> <%= item.country %> </td> 
+  
+                <td>
+                  <a
+                    data-bs-toggle="tooltip"
+                    data-bs-title="View details"
+                    data-bs-placement="top"
+                    class="btn btn-primary btn-sm"
+                    href="./view/<%= item._id %>"
+                    ><i class="bi bi-eye"></i
+                  ></a>
+  
+                  <a
+                    data-bs-toggle="tooltip"
+                    data-bs-title="Edit user"
+                    data-bs-placement="top"
+                    class="btn btn-primary btn-sm"
+                    href="./edit/<%= item._id %>"
+                  >
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                  <form style="display: inline" action="/delete/<%= item._id %>?_method=DELETE" method="post" action="/">
+                    <button
+                    data-bs-toggle="tooltip"
+                    data-bs-title="Delete user"
+                    data-bs-placement="top"
+                    class="btn btn-danger btn-sm"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
+                  </form>
+                </td>
+              </tr>
+              <% }) %>
+            
 
-              <td>
-                <a
-                  data-bs-toggle="tooltip"
-                  data-bs-title="View details"
-                  data-bs-placement="top"
-                  class="btn btn-primary btn-sm"
-                  href="./user/view.html"
-                  ><i class="bi bi-eye"></i
-                ></a>
-
-                <a
-                  data-bs-toggle="tooltip"
-                  data-bs-title="Edit user"
-                  data-bs-placement="top"
-                  class="btn btn-primary btn-sm"
-                  href="./user/edit.html"
-                >
-                  <i class="bi bi-pencil"></i>
-                </a>
-                <button
-                  data-bs-toggle="tooltip"
-                  data-bs-title="Delete user"
-                  data-bs-placement="top"
-                  class="btn btn-danger btn-sm"
-                >
-                  <i class="bi bi-trash"></i>
-                </button>
-              </td>
-            </tr>
           </tbody>
+        
+
         </table>
+        <% } else { %>
+          <h1 style="margin-top: 250px; text-align: center; ;">
+            No Data Available
+          </h1>
+        <% } %>
+         
       </section>
     </main>
     <script src="../js/bootstrap.bundle.min.js"></script>
