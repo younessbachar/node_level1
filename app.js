@@ -51,38 +51,65 @@ mongoose.connect('mongodb+srv://younessbachar02:youyou2003@express.ugnrc.mongodb
     console.log(err)
 })
 
+// POST Requst
 
 
 
-///router signup page
-
-app.use(signuprouter)
-
-///router login page
-app.use(loginrouter)
-
-///router welcome page
-
-app.use(welcomerouter)
-
-///router Home Page
-
-app.use(homerouter)
-
-////router add customer
-
-app.use(addrouter)
+app.get('/',(req,res)=>{
+    Customer.find()
+    .then((result)=>{
+        res.render("index",{arr: result, moment: moment})
+    }
+    ).catch((err)=>{
+        console.log(err)
+    })
+    
+})
 
 
-///router view
-app.use(viewrouter)
+app.get('/user/add.html',(req,res)=>{
+    res.render("user/add",{country_list: country_list})
+})
 
-///router search 
-app.use(searchrouter)
+app.get('/edit/:id',(req,res)=>{
+    Customer.findById(req.params.id)
+    .then((result)=>{
+        res.render("user/edit", {country_list: country_list,obj : result, moment: moment})
+    }).catch((err)=>{
+       console.log(err)
+    })
+    
+})
 
-///router update customer
+app.get('/view/:id',(req,res)=>{ 
+    Customer.findById(req.params.id)
+    .then((result)=>{
+        res.render("./user/view",{customerviewed: result, moment: moment })
+    }
+    ).catch((err)=>{
+        console.log(err)
+    })
+    
 
-app.use(editrouter)
+})
+
+
+
+
+
+//post request
+
+app.post("/user/add.html", (req, res) => {
+ 
+      Customer.create(req.body)
+      .then(() => {
+        res.redirect("/user/add.html");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
 
 /////delete request
 
