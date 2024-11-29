@@ -55,17 +55,6 @@ mongoose.connect('mongodb+srv://younessbachar02:youyou2003@express.ugnrc.mongodb
 
 
 
-app.get('/',(req,res)=>{
-    Customer.find()
-    .then((result)=>{
-        res.render("index",{arr: result, moment: moment})
-    }
-    ).catch((err)=>{
-        console.log(err)
-    })
-    
-})
-
 
 app.get('/user/add.html',(req,res)=>{
     res.render("user/add",{country_list: country_list})
