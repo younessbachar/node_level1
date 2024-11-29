@@ -18,7 +18,7 @@ const editrouter = require('./routes/editRoute')
 const viewrouter = require('./routes/viewRoute')
 const searchrouter = require('./routes/searchRoute')
 const deleterouter = require('./routes/deleteRoute') 
-const homerouter = require('./routes/homeroute')
+const homerouter = require('./routes/homeRoute')
 const loginrouter = require('./routes/loginRout')
 const signuprouter = require('./routes/signupRoute')
 
