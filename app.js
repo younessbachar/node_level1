@@ -7,14 +7,20 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 const methodOverride = require("method-override")
 app.use(methodOverride('_method'))
-const usercontroller = require('./controller/usercontroller')
+
+///authUser model
+const authUser =  require('./models/authUser');
 
 /// routers
+const welcomerouter = require('./routes/welcomeRoute');
 const addrouter = require('./routes/addCustomerRoute') 
 const editrouter = require('./routes/editRoute')
 const viewrouter = require('./routes/viewRoute')
 const searchrouter = require('./routes/searchRoute')
 const deleterouter = require('./routes/deleteRoute') 
+const homerouter = require('./routes/homeroute')
+const loginrouter = require('./routes/loginRout')
+const signuprouter = require('./routes/signupRoute')
 
 //auto refresh
 
@@ -34,7 +40,7 @@ liveReloadServer.server.once("connection", () => {
 
 
 // connect to MongoDB
-mongoose.connect('mongodb+srv://younessbachar02:youyou2003@express.ugnrc.mongodb.net/all-data?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://younessbachar02:youyou2003@express.ugnrc.mongodb.net/all-data?retryWrites=true&w=majority&appName=express')
 .then(()=>{
     app.listen(port,()=>{
         console.log("server work")
@@ -46,10 +52,22 @@ mongoose.connect('mongodb+srv://younessbachar02:youyou2003@express.ugnrc.mongodb
 })
 
 
-/// Home Page
 
-app.get('/',usercontroller.user_index_get)
 
+///router signup page
+
+app.use(signuprouter)
+
+///router login page
+app.use(loginrouter)
+
+///router welcome page
+
+app.use(welcomerouter)
+
+///router Home Page
+
+app.use(homerouter)
 
 ////router add customer
 
@@ -69,3 +87,18 @@ app.use(editrouter)
 /////delete request
 
 app.use(deleterouter)
+
+///Create User
+app.post("/signup", async (req, res) => {
+  try{
+    authUser.create(req.body)
+    .then((result)=>{
+      console.log(result)
+      res.redirect("signup")
+    }
+    )
+  }
+ catch(error){
+  console.log(error)
+ }
+});

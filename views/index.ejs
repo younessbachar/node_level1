@@ -60,10 +60,10 @@
           </thead>
           <tbody>
             
-            <% arr.forEach(item => { %>
+            <% arr.forEach((item, index) => { %>
            
               <tr>
-                <th scope="row">1</th>
+                <th scope="row"><%= index +1 %></th>
                 <td> <%= item.firstname %> <%= item.lastname %>	</td>
                 <td> <%= item.gender %>	</td>
                 <td> <%= item.country %> </td>
