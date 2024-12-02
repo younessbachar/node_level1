@@ -8,8 +8,8 @@ app.use(express.static('public'))
 const methodOverride = require("method-override")
 app.use(methodOverride('_method'))
 
-///authUser model
-const authUser =  require('./models/authUser');
+var cookieParser = require('cookie-parser');
+app.use(cookieParser())
 
 /// routers
 const welcomerouter = require('./routes/welcomeRoute');
