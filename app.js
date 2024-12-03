@@ -56,7 +56,9 @@ mongoose.connect('mongodb+srv://younessbachar02:youyou2003@express.ugnrc.mongodb
 })
 
 
-app.get('*', checkIfUser);
+
+
+app.use(checkIfUser)
 
 ///welcome route
 app.use(welcomerouter)
