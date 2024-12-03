@@ -16,12 +16,13 @@ router.post("/signup",async (req,res)=>{
     authUser.create(req.body)
     try{
         console.log("user created");
-        res.render("Auth/signup")
+        res.redirect("/login")
 
     }catch(error){
       console.log(error)
     }}else{
         console.log("username or email alredy existed");
+        res.redirect("/signup")
     }
 })
 

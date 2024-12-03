@@ -8,6 +8,9 @@ app.use(express.static('public'))
 const methodOverride = require("method-override")
 app.use(methodOverride('_method'))
 
+const checkIfUser = require('./middleware/checkIfuser');
+
+
 var cookieParser = require('cookie-parser');
 app.use(cookieParser())
 
@@ -21,7 +24,7 @@ const deleterouter = require('./routes/deleteRoute')
 const homerouter = require('./routes/homeRoute')
 const loginrouter = require('./routes/loginRout')
 const signuprouter = require('./routes/signupRoute')
-
+const signoutrouter = require('./routes/signoutRoute')
 
 //auto refresh
 
@@ -53,6 +56,8 @@ mongoose.connect('mongodb+srv://younessbachar02:youyou2003@express.ugnrc.mongodb
 })
 
 
+app.get('*', checkIfUser);
+
 ///welcome route
 app.use(welcomerouter)
 
@@ -61,6 +66,9 @@ app.use(signuprouter)
 
 ///login route
 app.use(loginrouter)
+
+///signout route
+app.use(signoutrouter)
 
 ////home route
 app.use(homerouter)
