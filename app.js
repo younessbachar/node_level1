@@ -8,7 +8,7 @@ app.use(express.static('public'))
 const methodOverride = require("method-override")
 app.use(methodOverride('_method'))
 
-const checkIfUser = require('./middleware/checkIfuser');
+const {checkIfUser} = require('./middleware/middleware');
 
 
 var cookieParser = require('cookie-parser');

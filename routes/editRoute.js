@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const usercontroller = require('../controller/usercontroller')
-const requireAuth = require("../middleware/requireAuth")
+const {requireAuth} = require("../middleware/middleware")
 
 ////get request
 router.get('/edit/:id',requireAuth , usercontroller.user_edit_get)
