@@ -161,7 +161,6 @@
 
         const data = await res.json();
         if (data.arrValidationError) {
-          console.log(data.arrValidationError);
           data.arrValidationError.forEach(item => {
             if(item.path == "email"){
                 emailerror.textContent = "please provide a valid email"
@@ -175,16 +174,13 @@
 
         
         if (data.existEmail) {
-          console.log(data.existEmail);
           emailerror.textContent = "email already existed"
         }
         if(data.existUsername){
-          console.log(data.existUsername)
           usernameerror.textContent = "username already existed"
         }
 
         if (data.id) {
-          console.log(data.id);
           location.assign("/home");
         }
       });

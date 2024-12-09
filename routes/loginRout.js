@@ -23,7 +23,7 @@ router.post("/login", async (req,res)=>{
             console.log("correct email & password");
             var token = jwt.sign({id: loginUser._id}, "12345")
             res.cookie("jwt", token, {httpOnly: true, maxAge: 86400000})
-            res.redirect("/home")
+           res.json({id: loginUser._id})
         }else{
             res.json({invalidpassword: "wrong password"})
         }

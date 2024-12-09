@@ -121,12 +121,13 @@ body {
 
         const data = await res.json();
         if(data.invalidemail){
-          console.log(data.invalidemail)
           emailerror.textContent = "email not found"
         }
         if (data.invalidpassword) {
-          console.log(data.invalidpassword)
           passworderror.textContent = "wrong password"
+        }
+        if (data.id) {
+          location.assign("/home");
         }
       })
 </script>
