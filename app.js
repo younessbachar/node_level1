@@ -10,6 +10,7 @@ app.use(methodOverride('_method'))
 app.use(express.json())
 const {checkIfUser} = require('./middleware/middleware');
 
+require('dotenv').config();
 
 var cookieParser = require('cookie-parser');
 app.use(cookieParser())
@@ -44,7 +45,9 @@ liveReloadServer.server.once("connection", () => {
 
 
 // connect to MongoDB
-mongoose.connect('mongodb+srv://younessbachar02:youyou2003@express.ugnrc.mongodb.net/all-data?retryWrites=true&w=majority&appName=express')
+mongoose.connect(
+   process.env.MONGODB_URL
+ )
 .then(()=>{
     app.listen(port,()=>{
         console.log("server work")

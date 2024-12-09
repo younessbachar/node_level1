@@ -21,7 +21,7 @@ router.post("/login", async (req,res)=>{
         const match = await bcrypt.compare(req.body.password, loginUser.password)
         if(match){
             console.log("correct email & password");
-            var token = jwt.sign({id: loginUser._id}, "12345")
+            var token = jwt.sign({id: loginUser._id}, process.env.JWT_SECRET_KEY)
             res.cookie("jwt", token, {httpOnly: true, maxAge: 86400000})
            res.json({id: loginUser._id})
         }else{

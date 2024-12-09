@@ -34,7 +34,7 @@ router.post("/signup",[
            return  
       }
               const newUser = await authUser.create(req.body);
-              var token = jwt.sign({id: newUser._id}, "12345")
+              var token = jwt.sign({id: newUser._id}, process.env.JWT_SECRET_KEY)
               await res.cookie("jwt", token, {httpOnly: true, maxAge: 86400000})
               res.json(   {id: newUser._id}     )      
       
