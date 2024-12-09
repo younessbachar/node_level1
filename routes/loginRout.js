@@ -13,11 +13,10 @@ router.get("/login",(req,res)=>{
 ///post request
 router.post("/login", async (req,res)=>{
     
-    const loginUser = await authUser.findOne({email: req.body.email})
-     console.log(loginUser);
+    const loginUser = await authUser.findOne({$or: [{ email: req.body.email},{username: req.body.email}]})
     if(!loginUser){
-        console.log("email not found");
-        res.render("Auth/login")
+        res.json({invalidemail: "wrong email"})
+    
     }else{
         const match = await bcrypt.compare(req.body.password, loginUser.password)
         if(match){
@@ -26,9 +25,8 @@ router.post("/login", async (req,res)=>{
             res.cookie("jwt", token, {httpOnly: true, maxAge: 86400000})
             res.redirect("/home")
         }else{
-            console.log("wrong password");
-            res.render("Auth/login")
-         }
+            res.json({invalidpassword: "wrong password"})
+        }
 }
 })
 

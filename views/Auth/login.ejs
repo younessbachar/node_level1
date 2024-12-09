@@ -72,6 +72,11 @@ body {
   color: #fff;
   border-bottom-color: #fff;
 }
+#passworderror, #emailerror{
+       color: red;
+       margin-left: 0.4rem;
+       font-weight: 600;
+      }
         </style>
       </head>
 <body class="d-flex h-100 text-center text-bg-dark">
@@ -81,14 +86,16 @@ body {
   <%- include('./header.ejs',{currentPage: "login"}) %>
 
    <h1>login</h1>
-   <form method="post" action="/login" class="text-start w-100 mx-auto mt-5" style="max-width: 20em;">
+   <form id="loginForm" class="text-start w-100 mx-auto mt-5" style="max-width: 20em;">
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <label for="exampleInputEmail1" class="form-label">Email or Username</label>
+      <input type="text" name="email" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <p id="emailerror"></p>
     </div>
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+      <input type="password" name="password" required class="form-control" id="exampleInputPassword1">
+      <p id="passworderror"></p>
     </div>
     <div class="mb-3 form-check">
       <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -100,6 +107,29 @@ body {
     <p>Designed and developed by Youness Bachar Khir © 2024</p>
   </footer>
 </div>
+<script>
+   loginForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+         const res = await fetch("/login", {
+          method: "POST",
+          body: JSON.stringify({
+            email: exampleInputEmail1.value,
+            password: exampleInputPassword1.value,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+
+        const data = await res.json();
+        if(data.invalidemail){
+          console.log(data.invalidemail)
+          emailerror.textContent = "email not found"
+        }
+        if (data.invalidpassword) {
+          console.log(data.invalidpassword)
+          passworderror.textContent = "wrong password"
+        }
+      })
+</script>
 <script src="./js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

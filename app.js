@@ -7,7 +7,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 const methodOverride = require("method-override")
 app.use(methodOverride('_method'))
-
+app.use(express.json())
 const {checkIfUser} = require('./middleware/middleware');
 
 
@@ -60,9 +60,6 @@ mongoose.connect('mongodb+srv://younessbachar02:youyou2003@express.ugnrc.mongodb
 
 app.use(checkIfUser)
 
-///welcome route
-app.use(welcomerouter)
-
 ///signup rout
 app.use(signuprouter)
 
@@ -71,6 +68,9 @@ app.use(loginrouter)
 
 ///signout route
 app.use(signoutrouter)
+
+///welcome route
+app.use(welcomerouter)
 
 ////home route
 app.use(homerouter)

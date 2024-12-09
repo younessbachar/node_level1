@@ -13,6 +13,6 @@ const customerSchema = new Schema({
 },
 {timestamps: true});
 
-const Customer = mongoose.model("Mydata",customerSchema)
+const Customer = mongoose.model("customer",customerSchema)
 
 module.exports = Customer
