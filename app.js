@@ -26,6 +26,7 @@ const homerouter = require('./routes/homeRoute')
 const loginrouter = require('./routes/loginRout')
 const signuprouter = require('./routes/signupRoute')
 const signoutrouter = require('./routes/signoutRoute')
+const profileimagerouter = require('./routes/profile-imageRoute') 
 
 //auto refresh
 
@@ -93,6 +94,8 @@ app.use(deleterouter)
 ///search route
 app.use(searchrouter)
 
+///profile.image route
 
+app.use(profileimagerouter)
 
 

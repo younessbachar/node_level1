@@ -1,33 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const authUser = require("../models/authUser")
-const bcrypt = require("bcrypt")
-const jwt = require('jsonwebtoken');
+const usercontroller = require('../controller/usercontroller')
+
 
 ///get request
-router.get("/login",(req,res)=>{
-    res.render("Auth/login")
-})
+router.get("/login", usercontroller.login_get_controller)
 
 
 ///post request
-router.post("/login", async (req,res)=>{
-    
-    const loginUser = await authUser.findOne({$or: [{ email: req.body.email},{username: req.body.email}]})
-    if(!loginUser){
-        res.json({invalidemail: "wrong email"})
-    
-    }else{
-        const match = await bcrypt.compare(req.body.password, loginUser.password)
-        if(match){
-            var token = jwt.sign({id: loginUser._id}, process.env.JWT_SECRET_KEY)
-            res.cookie("jwt", token, {httpOnly: true, maxAge: 86400000})
-           res.json({id: loginUser._id})
-        }else{
-            res.json({invalidpassword: "wrong password"})
-        }
-}
-})
+router.post("/login", usercontroller.login_post_controller)
 
 module.exports = router;
 

@@ -1,10 +1,10 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const router = express.Router();
 
-router.get("/signout", (req,res)=>{
-    res.cookie("jwt", "", {httpOnly: true, maxAge: 1})
-    res.redirect("/")
-})
+const router = express.Router();
+const usercontroller = require('../controller/usercontroller')
+
+
+
+router.get("/signout", usercontroller.signout_controller)
 
 module.exports = router
