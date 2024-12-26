@@ -27,6 +27,8 @@ const loginrouter = require('./routes/loginRout')
 const signuprouter = require('./routes/signupRoute')
 const signoutrouter = require('./routes/signoutRoute')
 const profileimagerouter = require('./routes/profile-imageRoute') 
+const deleteAllrouter = require("./routes/deleteAllRoute")
+
 
 //auto refresh
 
@@ -90,6 +92,9 @@ app.use(editrouter)
 
 ///delete route
 app.use(deleterouter)
+
+///deleteAll route
+app.use(deleteAllrouter)
 
 ///search route
 app.use(searchrouter)

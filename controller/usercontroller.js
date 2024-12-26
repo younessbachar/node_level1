@@ -178,6 +178,22 @@ const user_delete = (req,res)=>{
     
 }
 
+//// deleteALL controller
+const user_deleteAll = (req,res)=>{
+    var decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET_KEY)
+    authUser.updateOne({_id: decoded.id},
+         { $set: { customerInfo : []}}
+        )
+    .then(()=>{
+        console.log("deleted All")
+        res.redirect("/home")
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+    
+}
+
 
 /// search controller
 
@@ -232,4 +248,4 @@ const user_profileImage_post = async(req, res, next)=>{
     })}
 
 
-module.exports = {user_add_get, user_post, user_delete, user_edit_get, user_put, user_search_post, user_view_get, user_index_get, signup_get_controller, signout_controller, signup_post_controller, login_get_controller, login_post_controller, user_profileImage_post}
+module.exports = {user_add_get, user_post, user_delete, user_deleteAll, user_edit_get, user_put, user_search_post, user_view_get, user_index_get, signup_get_controller, signout_controller, signup_post_controller, login_get_controller, login_post_controller, user_profileImage_post}
